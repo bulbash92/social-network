@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.app-wrapper {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+
+
+.app-wrapper-content {
+    display: flex;
+    background-color: cadetblue;
+
+}
+
+

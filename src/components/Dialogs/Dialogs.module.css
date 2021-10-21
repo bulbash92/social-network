@@ -1,0 +1,40 @@
+.dialogs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dialogsItems {
+    padding: 10px;
+}
+
+.dialogsItem {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dialogsItem .active {
+    color: gold;
+}
+
+.dialogsItem img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.dialogsItem a {
+    text-decoration: none;
+    color: white;
+}
+
+.messages {
+    padding: 10px;
+}
+
+.message {
+
+}
+
+.inputMessage {
+    padding: 5px;
+}
