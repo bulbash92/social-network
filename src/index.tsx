@@ -6,7 +6,7 @@ import './index.css';
 import App from './App';
 // import {addMessage, addPost, RootStateType, updateNewMessageText, updateNewPostText} from "./Redux/State";
 import {BrowserRouter} from "react-router-dom";
-import store from "./Redux/State";
+import store from "./Redux/store";
 
 let rerenderEntireTree = () => {
     ReactDOM.render(

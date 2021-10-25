@@ -1,4 +1,7 @@
 import {v1} from "uuid";
+import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+import dialogsReducer, {addMessageAC, updateNewMessageTextAC} from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
 export type StoreType = {
     _state: RootStateType
@@ -12,45 +15,11 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-
-
 export type ActionsType =
     ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof addMessageAC>
     | ReturnType<typeof updateNewMessageTextAC>
-
-
-export const addPostActionCreator = (postText: string) => {
-    return {
-        type: 'ADD-POST',
-        newPostText: postText
-    } as const
-}
-
-export const updateNewPostTextActionCreator = (postText: string,) => {
-    return {
-
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: postText
-    } as const
-}
-
-export const addMessageAC = (messageText: string) => {
-    return {
-        type: 'ADD-MESSAGE',
-        newText: messageText
-
-    }
-}
-export const updateNewMessageTextAC = (messageText: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newText: messageText
-
-    }
-}
-
 
 let store: StoreType = {
     _state: {
@@ -74,7 +43,7 @@ let store: StoreType = {
                 {message: 'How are you', id: v1()},
                 {message: 'Yo', id: v1()}
             ],
-            newMessageText: 'hello'
+            newMessageText: ''
         },
         sidebar: {}
     },
@@ -114,37 +83,16 @@ let store: StoreType = {
         this._state.dialogsPage.newMessageText = newText
         this._callSubscriber()
     },
-    dispatch(action) {  // {type: 'ADD-POST'}
-        if (action.type === 'ADD-POST') {
-            const newPost: PostType = {
-                id: v1(),
-                message: this._state.profilePage.newPostText,  //this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber()
+    dispatch(action) {
 
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber()
-        } else if (action.type === 'ADD-MESSAGE') {
-            const newMessage: MessageType = {
-                id: v1(),
-                message: this._state.dialogsPage.newMessageText
-            }
-            this._state.dialogsPage.messages.push(newMessage)
-            this._state.dialogsPage.newMessageText = ''
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessageText = action.newText
-            this._callSubscriber()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._callSubscriber()
     }
 }
 
-
-type MessageType = {
+export type MessageType = {
     id: string
     message: string
 }
@@ -153,7 +101,7 @@ type DialogType = {
     id: string
     name: string
 }
-type PostType = {
+export type PostType = {
     id: string
     message: string
     likesCount: number

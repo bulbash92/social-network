@@ -2,7 +2,8 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {ActionsType, addMessageAC, DialogPageType, updateNewMessageTextAC} from "../../Redux/State";
+import {ActionsType, DialogPageType} from "../../Redux/store";
+import {addMessageAC, updateNewMessageTextAC} from "../../Redux/dialogs-reducer";
 
 type DialogsType = {
     dialogsPage: DialogPageType
@@ -16,7 +17,7 @@ function Dialogs(props: DialogsType) {
 
     const newMessageElement = React.createRef<HTMLTextAreaElement>()
 
-    const addMessage = () => {
+    const OnSendMessageCLick = () => {
         if (newMessageElement.current) {
             // props.dispatch({type: 'ADD-MESSAGE', newText: newMessageElement.current?.value})
             props.dispatch(addMessageAC(newMessageElement.current.value))
@@ -24,7 +25,7 @@ function Dialogs(props: DialogsType) {
     }
     const onMessageChange = () => {
         if (newMessageElement.current) {
-            props.dispatch({type: "UPDATE-NEW-MESSAGE-TEXT",  newText:newMessageElement.current.value})
+            props.dispatch({type: "UPDATE-NEW-MESSAGE-TEXT", newText: newMessageElement.current.value})
             props.dispatch(updateNewMessageTextAC(newMessageElement.current.value))
         }
     }
@@ -38,9 +39,18 @@ function Dialogs(props: DialogsType) {
                     {messagesElements}
                 </div>
             </div>
-            <textarea className={s.inputMessage} autoFocus onChange={onMessageChange} ref={newMessageElement}
-                      value={props.dialogsPage.newMessageText}></textarea>
-            <button onClick={addMessage}>send</button>
+            <div>
+                <div>
+                    <textarea className={s.inputMessage}
+                              autoFocus
+                              onChange={onMessageChange}
+                              ref={newMessageElement}
+                              value={props.dialogsPage.newMessageText}>
+
+                </textarea>
+                </div>
+                <button onClick={OnSendMessageCLick}>send</button>
+            </div>
         </div>
     )
 }

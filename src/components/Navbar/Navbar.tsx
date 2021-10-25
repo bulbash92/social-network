@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import s from './Navbar.module.css'
 import DialogItem from "../Dialogs/DialogItem/DialogItem";
 import {v1} from "uuid";
-import {SidebarType} from "../../Redux/State";
+import {SidebarType} from "../../Redux/store";
 
 type NavbarType = {
     sidebar: SidebarType

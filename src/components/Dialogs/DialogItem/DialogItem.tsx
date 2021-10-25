@@ -1,7 +1,7 @@
 import React from "react";
 import s from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
-import state from "../../../Redux/State";
+import state from "../../../Redux/store";
 import {v1} from "uuid";
 
 
