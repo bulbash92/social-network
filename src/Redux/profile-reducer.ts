@@ -16,11 +16,15 @@ export const updateNewPostTextActionCreator = (postText: string,) => {
         newText: postText
     } as const
 }
+const initialState = {
+    posts: [
+        {message: 'Hi, how are you?', id: v1(), likesCount: 12},
+        {message: 'It s my first pos', id: v1(), likesCount: 9}
+    ],
+    newPostText: 'it-kamasutra.com',
+}
 
-//type profileReducerACType = ReturnType<typeof addPostActionCreator>
-//  | ReturnType<typeof updateNewPostTextActionCreator>
-
-const profileReducer = (state: ProfilePageType, action: ActionsType) => {
+const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
 
     switch (action.type) {
         case 'ADD-POST':
