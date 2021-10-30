@@ -1,5 +1,5 @@
 import * as React from "react";
-import {StoreType} from "./Redux/store";
+import {StoreType} from "./Redux/redux-store";
 
 const StoreContext = React.createContext({} as StoreType)
 //export type StoreContextType = typeof StoreContext
