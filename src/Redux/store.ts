@@ -92,7 +92,7 @@ let store: StoreType = {
     }
 }
 
-export type MessageType = {
+type MessageType = {
     id: string
     message: string
 }
@@ -101,13 +101,13 @@ type DialogType = {
     id: string
     name: string
 }
-export type PostType = {
+ type PostType = {
     id: string
     message: string
     likesCount: number
 }
 
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }

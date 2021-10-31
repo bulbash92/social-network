@@ -1,30 +1,28 @@
 import {v1} from "uuid";
-import {PostType} from "../components/Profile/MyPosts/Post/Post";
-import {ActionsType, ProfilePageType} from "./store";
+import {ActionsType} from "./store";
+import {type} from "os";
 
-export const addPostActionCreator = (postText: string) => {
-    return {
-        type: 'ADD-POST',
-        newPostText: postText
-    } as const
+export type PostType = {
+    id: string
+    message: string
+    likesCount: number
 }
 
-export const updateNewPostTextActionCreator = (postText: string,) => {
-    return {
-
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: postText
-    } as const
+export type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
 }
+
 const initialState = {
     posts: [
         {message: 'Hi, how are you?', id: v1(), likesCount: 12},
         {message: 'It s my first pos', id: v1(), likesCount: 9}
-    ],
-    newPostText: 'it-kamasutra.com',
+    ] as Array<PostType>,
+    newPostText: 'it',
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
+export type InitialStateType = typeof initialState
+const profileReducer = (state: ProfilePageType = initialState, action: ActionsType):InitialStateType => {
 
     switch (action.type) {
         case 'ADD-POST':
@@ -43,6 +41,21 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
             return state
     }
 
+}
+
+export const addPostActionCreator = (postText: string) => {
+    return {
+        type: 'ADD-POST',
+        newPostText: postText
+    } as const
+}
+
+export const updateNewPostTextActionCreator = (postText: string,) => {
+    return {
+
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: postText
+    } as const
 }
 
 export default profileReducer

@@ -13,15 +13,11 @@ type ProfilePropsType = {
 }
 
 function Profile(props: ProfilePropsType) {
-    // const state = props.store
-    return(
+
+    return (
         <main className={s.profile}>
-           <ProfileIfo/>
-            <MyPostsContainer
-                // newPostText={state.getState().profilePage.newPostText}
-                // dispatch={state.dispatch}
-                // posts={state.getState().profilePage.posts}
-            />
+            <ProfileIfo/>
+            <MyPostsContainer/>
         </main>
     )
 }

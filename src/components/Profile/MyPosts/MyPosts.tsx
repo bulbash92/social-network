@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from 'react'
 import s from './MyPosts.module.css'
 import Post, {PostType} from "./Post/Post";
+import {InitialStateType} from "../../../Redux/profile-reducer";
 
 type MyPostsPropsType = {
-    posts: Array<PostType>
-    newPostText: string
+    profilePage: InitialStateType
     addPost: (text: string) => void
     updateNewPostText: (text: string) => void
 }
@@ -12,7 +12,7 @@ type MyPostsPropsType = {
 
 function MyPosts(props: MyPostsPropsType) {
 
-    const postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)
+    const postsElements = props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
@@ -32,7 +32,7 @@ function MyPosts(props: MyPostsPropsType) {
                 <div>
                     <textarea
                         onChange={onPostChange}
-                        value={props.newPostText}
+                        value={props.profilePage.newPostText}
                         ref={newPostElement}>
                     </textarea>
                 </div>

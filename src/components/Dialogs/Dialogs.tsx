@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 import {DialogPageType} from "../../Redux/store";
 
 type DialogsType = {
-     dialogsPage: DialogPageType
+    dialogsPage: DialogPageType
     addMessageText: (text: string) => void
     onMessageChange: (text: string) => void
 }

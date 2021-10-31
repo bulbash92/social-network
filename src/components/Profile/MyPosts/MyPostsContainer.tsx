@@ -1,48 +1,36 @@
 import React from 'react'
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/profile-reducer";
+import {addPostActionCreator, InitialStateType, updateNewPostTextActionCreator} from "../../../Redux/profile-reducer";
 import MyPosts from "./MyPosts";
-import StoreContext from '../../../StoreContext';
+import {connect} from "react-redux";
+import {AppStateType} from "../../../Redux/redux-store";
+import {Dispatch} from "redux";
 
-type MyPostsContainerType = {
-    // dispatch: (action: ActionsType) => void
-    // posts: Array<PostType>
-    // newPostText: string
+type mapStateToPropsType = {
+   profilePage:InitialStateType
 }
 
-
-function MyPostsContainer(props: MyPostsContainerType) {
-
-    // const addPost = (text: string) => {
-    //     props.dispatch(addPostActionCreator(text))
-    // }
-    // const onPostChange = (text: string) => {
-    //     let action = updateNewPostTextActionCreator(text)
-    //     props.dispatch(action)
-    // }
-
-    return (
-        <StoreContext.Consumer>
-            {
-            (store) => {
-                // let state = store.getState()
-
-                const addPost = (text: string) => {
-                    store.dispatch(addPostActionCreator(text))
-                }
-                const onPostChange = (text: string) => {
-                    let action = updateNewPostTextActionCreator(text)
-                    store.dispatch(action)
-                }
-                return  <MyPosts
-                    newPostText={store.getState().profilePage.newPostText}
-                    posts={store.getState().profilePage.posts}
-                    addPost={addPost}
-                    updateNewPostText={onPostChange}/>
-            }
-        }
-
-        </StoreContext.Consumer>
-    )
+type mapDispatchToPropsType = {
+    updateNewPostText: (text:string) => void,
+    addPost: (text: string) => void
 }
+
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+    return {
+        profilePage: state.profilePage
+    }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+    return {
+        updateNewPostText: (text:string) => {
+            dispatch(updateNewPostTextActionCreator(text))
+        },
+        addPost: (text: string) => {
+            dispatch(addPostActionCreator(text))
+        },
+    }
+}
+
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer

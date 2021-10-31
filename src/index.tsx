@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import store from "./Redux/redux-store";
-import {Provider} from "./StoreContext";
+import store from "./Redux/redux-store"
+import {Provider} from "react-redux";
 
 let rerenderEntireTree = (state: any) => {
     ReactDOM.render(
@@ -13,7 +13,6 @@ let rerenderEntireTree = (state: any) => {
             <BrowserRouter>
                 <Provider store={store}>
                     <App
-                        // store={store}
                     />
                 </Provider>
             </BrowserRouter>
