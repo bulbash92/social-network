@@ -2,6 +2,7 @@ import {v1} from "uuid";
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {addMessageAC, updateNewMessageTextAC} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import {followedToggleAC, setUsersAC} from "./usersReducer";
 
 export type StoreType = {
     _state: RootStateType
@@ -20,6 +21,9 @@ export type ActionsType =
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof addMessageAC>
     | ReturnType<typeof updateNewMessageTextAC>
+    | ReturnType<typeof followedToggleAC>
+    | ReturnType<typeof setUsersAC>
+
 
 let store: StoreType = {
     _state: {
@@ -101,18 +105,17 @@ type DialogType = {
     id: string
     name: string
 }
- type PostType = {
+type PostType = {
     id: string
     message: string
     likesCount: number
 }
 
- type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
-
-export type DialogPageType = {
+ type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageText: string

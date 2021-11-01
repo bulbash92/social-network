@@ -1,7 +1,11 @@
-import {ActionsType, DialogPageType} from "./store";
+import {ActionsType} from "./store";
 import {v1} from "uuid";
 
-
+export type DialogPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessageText: string
+}
 export type MessageType = {
     id: string
     message: string
@@ -33,27 +37,36 @@ const initialState = {
         {name: 'Victoria', id: v1()},
         {name: 'Robert', id: v1()},
         {name: 'Evgeniy', id: v1()}
-    ]as Array<DialogType>,
+    ] as Array<DialogType>,
     messages: [
         {message: 'Hi', id: v1()},
         {message: 'How are you', id: v1()},
         {message: 'Yo', id: v1()}
-    ]as Array<MessageType>,
+    ] as Array<MessageType>,
     newMessageText: ''
 }
 
 export type InitialStateType = typeof initialState
- const dialogsReducer = (state: DialogPageType = initialState, action: ActionsType) : InitialStateType => {
-    if (action.type === 'ADD-MESSAGE') {
-        const newMessage: MessageType = {
-            id: v1(),
-            message: state.newMessageText
-        }
-        state.messages.push(newMessage)
-        state.newMessageText = ''
+const dialogsReducer = (state: DialogPageType = initialState, action: ActionsType): InitialStateType => {
 
-    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-        state.newMessageText = action.newText
+    switch (action.type) {
+        case 'ADD-MESSAGE': {
+            const newMessage: MessageType = {
+                id: v1(),
+                message: state.newMessageText
+            }
+            //const newState = {...state}
+            return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
+            // newState.messages.push(newMessage)
+            // newState.newMessageText = ''
+        }
+        case 'UPDATE-NEW-MESSAGE-TEXT': {
+            //const newState = {...state}
+            return {...state, newMessageText: action.newText}
+
+        }
+        default:
+            return state
     }
 
     return state

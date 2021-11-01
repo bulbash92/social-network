@@ -2,7 +2,8 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogPageType} from "../../Redux/store";
+import {DialogPageType} from "../../Redux/dialogs-reducer";
+
 
 type DialogsType = {
     dialogsPage: DialogPageType
@@ -12,8 +13,8 @@ type DialogsType = {
 
 function Dialogs(props: DialogsType) {
 
-    const messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} id={m.id}/>)
-    const dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    const messagesElements = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
+    const dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
 
     const newMessageElement = React.createRef<HTMLTextAreaElement>()
 

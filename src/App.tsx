@@ -8,6 +8,8 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Users from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 type AppType = {
@@ -26,14 +28,11 @@ function App(props: AppType) {
                 />
                 <Route
                     path='/Profile'
-                    render={() => <Profile
-                        // dispatch={props.store.dispatch.bind(props.store)}
-                        // profilePage={props.store.getState().profilePage}
-                        // store={props.store}
-                    />}
+                    render={() => <Profile/>}
                 />
                 <Route path='/News' component={News}/>
                 <Route path='/Music' component={Music}/>
+                <Route path='/Users' component={UsersContainer}/>
                 <Route path='/Settings' component={Settings}/>
             </div>
         </div>
