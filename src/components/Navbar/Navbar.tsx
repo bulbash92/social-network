@@ -14,19 +14,22 @@ function Navbar() {
         <nav className={s.nav}>
             <ul className={s.navList}>
                 <li className={s.item}>
-                    <NavLink to='/profile' activeClassName={s.active}>Profile</NavLink>
+                    <NavLink to='/profile' className={s.item} activeClassName={s.active}>Profile</NavLink>
                 </li>
                 <li className={s.item}>
-                    <NavLink to='/dialogs' activeClassName={s.active}>message</NavLink>
+                    <NavLink to='/dialogs' className={s.item} activeClassName={s.active}>Message</NavLink>
                 </li>
                 <li className={s.item}>
-                    <NavLink to='/news' activeClassName={s.active}>News</NavLink>
+                    <NavLink to='/users' className={s.item} activeClassName={s.active}>Users</NavLink>
                 </li>
                 <li className={s.item}>
-                    <NavLink to='/music' activeClassName={s.active}>Music</NavLink>
+                    <NavLink to='/news' className={s.item} activeClassName={s.active}>News</NavLink>
                 </li>
                 <li className={s.item}>
-                    <NavLink to='/settings' activeClassName={s.active}>Settings</NavLink>
+                    <NavLink to='/music' className={s.item} activeClassName={s.active}>Music</NavLink>
+                </li>
+                <li className={s.item}>
+                    <NavLink to='/settings' className={s.item} activeClassName={s.active}>Settings</NavLink>
                 </li>
             </ul>
             <div className={s.friends}>

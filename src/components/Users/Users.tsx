@@ -1,44 +1,56 @@
-import React from 'react';
-import { UserType} from "../../Redux/usersReducer";
+import React, {Component} from 'react';
+import {UserType} from "../../Redux/usersReducer";
 import styles from './users.module.css'
+import axios from 'axios';
+import userPhoto from '../../assects/images/user.png'
 
 type UsersType = {
     users: Array<UserType>
-    followedToggle :(userID: string) => void
-    setUsers: (users:Array<UserType>) => void
+    followedToggle: (userID: number) => void
+    setUsers: (users: Array<UserType>) => void
 }
 
-const Users = (props: UsersType) => {
-    if(props.users.length === 0) {
-        props.setUsers([])
+class Users extends Component<UsersType> {
+
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
     }
 
+    render() {
+        return (
 
-    return (
-        <div>
-        {
-            props.users.map(u => <div key={u.id}>
+            <div>
+                {
+                    this.props.users.map(u => <div key={u.id}>
                 <span>
                    <div>
-                       <img src={u.avatar} className={styles.photo}/>
+                       <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.photo}/>
                    </div>
                     <div>
-                        {u.followed ?<button onClick={() => {props.followedToggle(u.id)}}>Follow</button>
-                            : <button onClick={() => {props.followedToggle(u.id)}}>Unfollow</button>}
+                        {u.followed ? <button onClick={() => {
+                                this.props.followedToggle(u.id)
+                            }}>Follow</button>
+                            : <button onClick={() => {
+                                this.props.followedToggle(u.id)
+                            }}>Unfollow</button>}
                     </div>
                 </span>
-                <span>
-                    <div>{u.fullName}</div>
+                        <span>
+                    <div>{u.name}</div>
                     <div>{u.status}</div>
                 </span>
-                <span>
-                    <div>{u.location.country}</div>
-                    <div>{u.location.city}</div>
+                        <span>
+                    <div>{'u.location.country'}</div>
+                    <div>{'u.location.city'}</div>
                 </span>
-            </div>)
-        }
-        </div>
-    );
-};
+                    </div>)
+                }
+            </div>
+        );
+    }
+}
 
-export default Users;
+export default Users

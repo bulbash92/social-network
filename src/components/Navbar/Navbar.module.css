@@ -1,18 +1,35 @@
 .nav {
-    background-color: gray;
+    background-color: #354c5f;
     /*width: 150px;*/
     justify-content: center;
-    padding: 20px;
+    max-width: 220px;
+}
 
+.item {
+    overflow: hidden;
 }
 
 .item a {
-    color: white;
+    color: #b0c4d4;
     text-decoration: none;
+    line-height: 48px;
+    font-size: 20px;
+    padding-left: 15px;
+    display: block;
+    /*width: 100%;*/
+    border-bottom: 2px solid #334a5c;
 }
 
+.item a:hover {
+    background-color:#22323f;
+    color: #fff;
+}
+
+/*item a:hover {*/
+/*    color: #fff;*/
+/*}*/
 .item a.active {
-    color: gold;
+    color: #fff;
 }
 
 .friends {

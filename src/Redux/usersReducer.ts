@@ -1,5 +1,4 @@
 import {ActionsType} from "./store";
-import * as path from "path";
 
 
 type UserLocationType = {
@@ -7,13 +6,18 @@ type UserLocationType = {
     country: string
 }
 
+type PhotosType = {
+    small: string
+    large: string
+}
+
 export type UserType = {
-    id: string
-    fullName: string
+    id: number
+    name: string
     followed: boolean
     status: string
     location: UserLocationType
-    avatar: string
+    photos: PhotosType
 }
 
 export type UsersPageType = {
@@ -44,7 +48,7 @@ export type UsersACType = ReturnType<typeof followedToggleAC> | ReturnType<typeo
 
 // export type followToggleACType = ReturnType<typeof followedToggleAC>
 // export type setUsersACType = ReturnType<typeof setUsersAC>
-export const followedToggleAC = (userID: string) => {
+export const followedToggleAC = (userID: number) => {
     return {
         type: 'FOLLOW_TOGGLE',
         userID: userID

@@ -9,7 +9,7 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-    followedToggle: (userID: string) => void
+    followedToggle: (userID: number) => void
     setUsers: (users: Array<UserType>) => void
 }
 
@@ -21,7 +21,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        followedToggle: (userID: string) => {
+        followedToggle: (userID: number) => {
             dispatch(followedToggleAC(userID))
         },
         setUsers: (users: Array<UserType>) => {
