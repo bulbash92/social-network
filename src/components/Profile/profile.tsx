@@ -4,15 +4,7 @@ import ProfileIfo from "./ProfileInfo/ProfileIfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 
-type ProfilePropsType = {
-    // profilePage: ProfilePageType
-    // addPost: ()=> void
-    // updateNewPostText: (newText: string) => void
-    // dispatch: (action: ActionsType) => void
-    // store:Store<RootStateType, ActionsType>
-}
-
-function Profile(props: ProfilePropsType) {
+function Profile() {
 
     return (
         <main className={s.profile}>

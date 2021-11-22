@@ -1,56 +1,62 @@
-import React, {Component} from 'react';
+import React from "react";
+import styles from "./users.module.css";
+import userPhoto from "../../assects/images/user.png";
 import {UserType} from "../../Redux/usersReducer";
-import styles from './users.module.css'
-import axios from 'axios';
-import userPhoto from '../../assects/images/user.png'
 
-type UsersType = {
+type UsersPropsType = {
     users: Array<UserType>
     followedToggle: (userID: number) => void
-    setUsers: (users: Array<UserType>) => void
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
 }
 
-class Users extends Component<UsersType> {
+export const Users =(props: UsersPropsType) => {
+    let pagesCount = Math.ceil(props.totalUsersCount/ props.pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        if(pages.length <= 50) {
+            pages.push(i)
+        }
 
-    componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                this.props.setUsers(response.data.items)
-            })
     }
 
-    render() {
-        return (
+    return (
 
+        <div>
             <div>
-                {
-                    this.props.users.map(u => <div key={u.id}>
+                {pages.map(p => {
+                    return <span className={props.currentPage === p? styles.selectedPage: ''}
+                                 onClick={() =>{props.onPageChanged(p)}}
+                    >{p}</span>
+                })}
+            </div>
+            {
+                props.users.map(u => <div key={u.id}>
                 <span>
                    <div>
                        <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.photo}/>
                    </div>
                     <div>
                         {u.followed ? <button onClick={() => {
-                                this.props.followedToggle(u.id)
+                                props.followedToggle(u.id)
                             }}>Follow</button>
                             : <button onClick={() => {
-                                this.props.followedToggle(u.id)
+                                props.followedToggle(u.id)
                             }}>Unfollow</button>}
                     </div>
                 </span>
-                        <span>
+                    <span>
                     <div>{u.name}</div>
                     <div>{u.status}</div>
                 </span>
-                        <span>
+                    <span>
                     <div>{'u.location.country'}</div>
                     <div>{'u.location.city'}</div>
                 </span>
-                    </div>)
-                }
-            </div>
-        );
-    }
+                </div>)
+            }
+        </div>
+    );
 }
-
-export default Users
