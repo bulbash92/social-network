@@ -1,8 +1,14 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
+import {ProfileType} from "../../../Redux/profile-reducer";
+import {Preloader} from "../../preloader/preloader";
 
+type ProfileInfoPropsType ={ profile: ProfileType | null}
 
-function ProfileIfo() {
+function ProfileIfo({profile}: ProfileInfoPropsType) {
+    if(!profile) {
+        return <Preloader/>
+    }
     return (
         <>
             <div className={s.wallpaper}><img
@@ -10,8 +16,12 @@ function ProfileIfo() {
                 width='700px'/>
             </div>
             <div className={s.descriptionBlock}>
-                ava + descriptions
-                <img/>
+                <h3>{profile.fullName}</h3>
+                <img src={profile.photos.large} alt={'avatar'}/>
+                <p>{profile.lookingForAJob}</p>
+                <a href={'profile.contacts.github'}>{profile.contacts.github}</a>
+
+                <p>{profile.lookingForAJobDescription}</p>
             </div>
         </>
     )

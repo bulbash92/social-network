@@ -4,7 +4,7 @@ type UserLocationType = {
     country: string
 }
 
-type PhotosType = {
+export type PhotosType = {
     small: string
     large: string
 }

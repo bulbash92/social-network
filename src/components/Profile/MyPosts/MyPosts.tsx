@@ -1,10 +1,10 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 import s from './MyPosts.module.css'
-import Post, {PostType} from "./Post/Post";
-import {InitialStateType} from "../../../Redux/profile-reducer";
+import Post from "./Post/Post";
+import { ProfilePageType} from "../../../Redux/profile-reducer";
 
 type MyPostsPropsType = {
-    profilePage: InitialStateType
+    profilePage: ProfilePageType
     addPost: (text: string) => void
     updateNewPostText: (text: string) => void
 }
