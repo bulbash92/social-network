@@ -11,7 +11,6 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 type PathParamsType = {
     userId: string
 }
-
 type ProfileContainerType = MapStateToPropsType & MapDispatchPropsType
 
 type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerType

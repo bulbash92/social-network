@@ -8,6 +8,8 @@ type mapStateToPropsType = {
     dialogsPage: InitialStateType
 }
 
+
+
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage

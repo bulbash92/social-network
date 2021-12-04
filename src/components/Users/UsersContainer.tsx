@@ -11,7 +11,6 @@ import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../preloader/preloader";
 
-
 type UsersType = {
     users: Array<UserType>
     followedToggle: (userID: number) => void
@@ -29,7 +28,9 @@ class UsersContainer extends Component<UsersType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items);
@@ -40,7 +41,9 @@ class UsersContainer extends Component<UsersType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
@@ -54,12 +57,11 @@ class UsersContainer extends Component<UsersType> {
             if (pages.length <= 50) {
                 pages.push(i)
             }
-
         }
 
         return <div>
-            {this.props.isFetching?
-                <Preloader/>: null }
+            {this.props.isFetching ?
+                <Preloader/> : null}
             <Users
                 totalUsersCount={this.props.totalUsersCount}
                 currentPage={this.props.currentPage}

@@ -32,11 +32,13 @@ const initialState = {
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followed: false,
 }
 
+
 export type InitialStateType = typeof initialState
-const usersReducer = (state: UsersPageType = initialState, action: UsersACType): InitialStateType => {
+const usersReducer = (state: InitialStateType = initialState, action: UsersACType): InitialStateType => {
     switch (action.type) {
         case 'FOLLOW_TOGGLE':
             return {
