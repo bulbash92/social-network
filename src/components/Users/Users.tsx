@@ -4,6 +4,7 @@ import userPhoto from "../../assects/images/user.png";
 import {UserType} from "../../Redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersApi} from "../../api/api";
 
 type UsersPropsType = {
     users: Array<UserType>
@@ -28,7 +29,7 @@ export const Users = (props: UsersPropsType) => {
 
         <div>
             <div>
-                {pages.map((p, i )=> {
+                {pages.map((p, i) => {
                     return <span key={i} className={props.currentPage === p ? styles.selectedPage : ''}
                                  onClick={() => {
                                      props.onPageChanged(p)
@@ -49,30 +50,17 @@ export const Users = (props: UsersPropsType) => {
                     <div>
                         {u.followed ? <button onClick={() => {
 
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '1dc21a1e-2046-4bb2-a619-e1d85befa0b5'
-                                    }
-                                })
-                                    .then(response => {
-                                        if (response.data.resultCode === 0) {
+                                usersApi.unfollow(u.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
                                             props.followedToggle(u.id)
                                         }
                                     })
-
-
                             }}>Unfollow</button>
                             : <button onClick={() => {
-
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},{
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '1dc21a1e-2046-4bb2-a619-e1d85befa0b5'
-                                    }
-                                })
-                                    .then(response => {
-                                        if (response.data.resultCode === 0) {
+                                usersApi.follow(u.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
                                             props.followedToggle(u.id)
                                         }
                                     })
