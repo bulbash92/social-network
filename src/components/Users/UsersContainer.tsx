@@ -13,13 +13,11 @@ import {Preloader} from "../preloader/preloader";
 
 type UsersContainerType = {
     users: Array<UserType>
-    //followedToggle: (userID: number) => void
     pageSize: number
     totalUsersCount: number
     currentPage: number
     setCurrentPage: (currentPage: number) => void
     isFetching: boolean
-    //toggleFollowingProgress: (isFethcing: boolean, userId: number) => void
     followingInProgress: Array<number>
     getUsers: (currentPage: number, pageSize: number) => void
     follow: (userId: number) => void
@@ -54,8 +52,6 @@ class UsersContainer extends Component<UsersContainerType> {
                 pageSize={this.props.pageSize}
                 onPageChanged={this.onPageChanged}
                 users={this.props.users}
-               // followedToggle={this.props.followedToggle}
-                //toggleFollowingProgress={this.props.toggleFollowingProgress}
                 followingInProgress={this.props.followingInProgress}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}

@@ -1,6 +1,7 @@
 import axios from "axios";
+import {setUserProfile} from "../Redux/profile-reducer";
 
-const instanse = axios.create({
+const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
     headers: {
@@ -11,19 +12,23 @@ const instanse = axios.create({
 
 export const usersApi = {
     getUsers(currentPage: number, pageSize: number) {
-        return instanse.get(`users?page=${currentPage}&count=${pageSize}`)
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
     },
     follow(id: number) {
-        return instanse.post(`follow/${id}`, {},)
+        return instance.post(`follow/${id}`, {},)
             .then(response => response.data)
     },
     unfollow(id: number) {
-        return instanse.delete(`follow/${id}`)
+        return instance.delete(`follow/${id}`)
             .then(response => response.data)
     },
     authMe() {
-       return  instanse.get(`auth/me`)
+        return instance.get(`auth/me`)
+            .then(response => response.data)
+    },
+    getProfile(userId: string) {
+        return instance.get(`profile/` + userId)
             .then(response => response.data)
     }
 }

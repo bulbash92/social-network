@@ -1,5 +1,8 @@
 import {v1} from "uuid";
 import {PhotosType} from "./usersReducer";
+import {ThunkAction} from "redux-thunk/es/types";
+import {AppStateType} from "./redux-store";
+import {usersApi} from "../api/api";
 
 export type PostType = {
     id: string
@@ -30,7 +33,7 @@ export type ProfileType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
-    profile:  null | ProfileType
+    profile: null | ProfileType
 }
 
 const initialState = {
@@ -89,5 +92,15 @@ export const setUserProfile = (profile: ProfileType) => {
         type: 'SET-USER-PROFILE',
         profile,
     } as const
+}
+// thunk
+export const getUserProfile = (userId: string): ThunkAction<Promise<void>, AppStateType, unknown, ProfileActionsType> => {
+    return async (dispatch) => {
+        usersApi.getProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data));
+            })
+    }
+
 }
 export default profileReducer

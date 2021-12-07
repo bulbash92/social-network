@@ -1,6 +1,7 @@
 import {usersApi} from "../api/api";
 import {ThunkAction} from "redux-thunk/es/types";
 import {AppStateType} from "./redux-store";
+import {setAuthUserData} from "./auth-reducer";
 
 type UserLocationType = {
     city: string
@@ -166,4 +167,6 @@ export const unfollow = (userId: number): ThunkAction<Promise<void>, AppStateTyp
             })
     }
 }
+
+
 export default usersReducer
