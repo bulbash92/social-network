@@ -2,11 +2,12 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogPageType, updateNewMessageText} from "../../Redux/dialogs-reducer";
+import {DialogPageType} from "../../Redux/dialogs-reducer";
 
 
 type DialogsType = {
     dialogsPage: DialogPageType
+    isAuth: boolean
     addMessage: (text: string) => void
     updateNewMessageText: (text: string) => void
 }
@@ -28,6 +29,7 @@ function Dialogs(props: DialogsType) {
             props.updateNewMessageText(newMessageElement.current.value)
         }
     }
+
     return (
         <div>
             <div className={s.dialogs}>

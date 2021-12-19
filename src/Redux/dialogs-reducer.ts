@@ -32,7 +32,7 @@ const initialState = {
 }
 
 export type InitialStateType = typeof initialState
-const dialogsReducer = (state: DialogPageType = initialState, action: DialogsActionsType): InitialStateType => {
+const dialogsReducer = (state: InitialStateType = initialState, action: DialogsActionsType): InitialStateType => {
 
     switch (action.type) {
         case 'ADD-MESSAGE': {

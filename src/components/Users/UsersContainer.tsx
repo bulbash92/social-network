@@ -7,9 +7,11 @@ import usersReducer, {
     UserType
 } from "../../Redux/usersReducer";
 import {AppStateType} from "../../Redux/redux-store";
-import React, {Component} from "react";
+import React, {Component, ComponentType} from "react";
 import {Users} from "./Users";
 import {Preloader} from "../preloader/preloader";
+import {withAuthRedirect} from "../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type UsersContainerType = {
     users: Array<UserType>
@@ -82,11 +84,8 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-export default connect(mapStateToProps, {
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers,
-    follow,
-    unfollow,
 
-})(UsersContainer)
+export default compose<ComponentType>(
+    connect(mapStateToProps, {setCurrentPage, toggleFollowingProgress, getUsers, follow, unfollow,}),
+    withAuthRedirect
+)(UsersContainer)

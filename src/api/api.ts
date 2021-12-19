@@ -1,11 +1,10 @@
 import axios from "axios";
-import {setUserProfile} from "../Redux/profile-reducer";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
     headers: {
-        'API-KEY': '1dc21a1e-2046-4bb2-a619-e1d85befa0b5'
+        'API-KEY': 'ef800069-c5f3-467c-9f0b-02d4de59b8ee'
     }
 
 })
@@ -23,12 +22,21 @@ export const usersApi = {
         return instance.delete(`follow/${id}`)
             .then(response => response.data)
     },
-    authMe() {
+    getProfile(userId: string) {
+        return instance.get(`profile/` + userId)
+    },
+    getProfileStatus(userId: string) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(status: string ) {
+        return instance.put('profile/status', {status})
+    }
+
+}
+
+export const authApi = {
+    me() {
         return instance.get(`auth/me`)
             .then(response => response.data)
     },
-    getProfile(userId: string) {
-        return instance.get(`profile/` + userId)
-            .then(response => response.data)
-    }
 }
