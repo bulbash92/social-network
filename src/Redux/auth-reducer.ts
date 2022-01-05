@@ -3,14 +3,14 @@ import {AppStateType} from "./redux-store";
 import {authApi} from "../api/api";
 
 export type initialStateAuthType = {
-    id: number | null
+    userId: number | null
     email: string | null
     login: string | null
     isAuth: boolean
 }
 
 let initialState = {
-    id: null,
+    userId: null,
     email: null,
     login: null,
     isAuth: false,

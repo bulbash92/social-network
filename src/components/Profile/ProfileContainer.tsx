@@ -28,7 +28,9 @@ class ProfileContainer extends Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '2';
+            if(this.props.userId) {
+                userId = this.props.userId.toString();
+            }
         }
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
@@ -53,6 +55,7 @@ class ProfileContainer extends Component<PropsType> {
 type MapStateToPropsType = {
     profile: null | ProfileType
     newStatusText: string
+    userId: number | null
 }
 
 type MapDispatchPropsType = {
@@ -66,7 +69,8 @@ type MapDispatchPropsType = {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        newStatusText: state.profilePage.newStatusText
+        newStatusText: state.profilePage.newStatusText,
+        userId: state.auth.userId
     }
 }
 

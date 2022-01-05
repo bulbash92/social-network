@@ -18,13 +18,13 @@ type UsersPropsType = {
 }
 
 export const Users = (props: UsersPropsType) => {
+
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
         if (pages.length <= 50) {
             pages.push(i)
         }
-
     }
 
     return (

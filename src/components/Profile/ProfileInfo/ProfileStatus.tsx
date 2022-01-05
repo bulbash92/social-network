@@ -1,5 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from './ProfileInfo.module.css'
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../Redux/redux-store";
 
 type ProfileStatusType = {
     status: string
@@ -8,30 +10,41 @@ type ProfileStatusType = {
 }
 
 const ProfileStatus = ({status, onChange, updateStatus}: ProfileStatusType) => {
-    let [title, setTitle] = useState<any>(status);
+    const statusP = useSelector<AppStateType, string>(state => state.profilePage.newStatusText)
+    const ownerId = useSelector<AppStateType, number | null>(state => state.auth.userId)
+    const profileId = useSelector<AppStateType, number | undefined>(state => state.profilePage.profile?.userId)
+    const isOwner = ownerId === profileId
+    console.log(ownerId)
+    console.log(profileId)
 
+    useEffect(() => {
+        setTitle(statusP)
+    }, [statusP])
+
+    const [title, setTitle] = useState<any>(status);
     const [editMode, setEditMode] = useState<boolean>(false)
 
-    const activateEditeMode = () => {
+    const activateEditMode = () => {
+        if(!isOwner) return
         setEditMode(true)
         setTitle(status)
     }
     const activateViewMode = () => {
         setEditMode(false);
-        updateStatus(title)
         onChange(title);
+        updateStatus(title)
     }
 
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-       setTitle(e.currentTarget.value)
-
+        setTitle(e.currentTarget.value)
     }
 
 
     return (
         <div>
+
             {editMode ? <input value={title} onChange={onStatusChange} autoFocus onBlur={activateViewMode}/>
-                : <span className={s.editableSpan} onDoubleClick={activateEditeMode}>{title}</span>}
+                : <span className={s.editableSpan} onDoubleClick={activateEditMode}>{title || "---"}</span>}
         </div>
     )
 };

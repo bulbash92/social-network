@@ -48,7 +48,7 @@ const initialState = {
 }
 
 export type InitialStateType = typeof initialState
-const profileReducer = (state: ProfilePageType= initialState, action: ProfileActionsType): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionsType): ProfilePageType => {
 
     switch (action.type) {
         case 'ADD-POST': {
@@ -115,26 +115,26 @@ export const getUserProfile = (userId: string): ThunkAction<Promise<void>, AppSt
     }
 
 }
-export const getUserStatus = (userId: string): ThunkAction<Promise<void>, AppStateType, unknown, ProfileActionsType> =>  {
+export const getUserStatus = (userId: string): ThunkAction<Promise<void>, AppStateType, unknown, ProfileActionsType> => {
     return async (dispatch) => {
         usersApi.getProfileStatus(userId)
             .then((res) => {
+
                 dispatch(setStatus(res.data))
             })
     }
 }
 
-export const updateStatus = (status: string): ThunkAction<Promise<void>, AppStateType, unknown, ProfileActionsType> =>  {
-    return async (dispatch) => {
+export const updateStatus = (status: string): ThunkAction<Promise<void>, AppStateType, unknown, ProfileActionsType> => {
+    return async (dispatch, getState) => {
         usersApi.updateStatus(status)
             .then((res) => {
-                if(res.data.resultCode === 0) {
-                    dispatch(setStatus(res.data))
+                if (res.data.resultCode === 0) {
+                    const userId = getState().profilePage.profile?.userId
+                    userId && dispatch(getUserStatus(userId.toString()))
                 }
-
             })
     }
 }
-
 
 export default profileReducer

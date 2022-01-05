@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -39,4 +39,14 @@ export const authApi = {
         return instance.get(`auth/me`)
             .then(response => response.data)
     },
+}
+
+type ResponseType<D = {}> = {
+    resultCode: number
+    messages: Array<string>
+    data: D
+}
+
+type ProfileStatusType = {
+    status: string
 }
