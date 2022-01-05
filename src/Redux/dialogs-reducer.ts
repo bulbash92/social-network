@@ -28,7 +28,7 @@ const initialState = {
         {message: 'How are you', id: v1()},
         {message: 'Yo', id: v1()}
     ] as Array<MessageType>,
-    newMessageText: ''
+    newMessageBody: ''
 }
 
 export type InitialStateType = typeof initialState
@@ -36,19 +36,16 @@ const dialogsReducer = (state: InitialStateType = initialState, action: DialogsA
 
     switch (action.type) {
         case 'ADD-MESSAGE': {
-            const newMessage: MessageType = {
-                id: v1(),
-                message: state.newMessageText
-            }
-            //const newState = {...state}
-            return {...state, messages: [...state.messages, newMessage], newMessageText: ''}
-            // newState.messages.push(newMessage)
-            // newState.newMessageText = ''
+            let body = action.newText
+            // const newMessageBody: MessageType = {
+            //     id: v1(),
+            // }
+            return {...state,
+                messages: [...state.messages, {id: v1(), message: body}],}
         }
         case 'UPDATE-NEW-MESSAGE-TEXT': {
             //const newState = {...state}
-            return {...state, newMessageText: action.newText}
-
+            return {...state, newMessageBody: action.newText}
         }
         default:
             return state

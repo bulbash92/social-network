@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, {AxiosResponse} from "axios";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -28,7 +28,7 @@ export const usersApi = {
     getProfileStatus(userId: string) {
         return instance.get(`profile/status/${userId}`)
     },
-    updateStatus(status: string ) {
+    updateStatus(status: string) {
         return instance.put('profile/status', {status})
     }
 
@@ -39,6 +39,16 @@ export const authApi = {
         return instance.get(`auth/me`)
             .then(response => response.data)
     },
+    login(data: LoginParamsType) {
+        return instance.post('auth/login', data)
+    }
+}
+
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe?: boolean
+    captcha?: boolean
 }
 
 type ResponseType<D = {}> = {

@@ -3,6 +3,7 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogPageType} from "../../Redux/dialogs-reducer";
+import AddMessageForm from "./Message/AddMessageForm";
 
 
 type DialogsType = {
@@ -17,17 +18,21 @@ function Dialogs(props: DialogsType) {
     const messagesElements = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
     const dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
 
-    const newMessageElement = React.createRef<HTMLTextAreaElement>()
+    // const newMessageElement = React.createRef<HTMLTextAreaElement>()
 
-    const OnSendMessageCLick = () => {
-        if (newMessageElement.current) {
-            props.addMessage(newMessageElement.current.value)
-        }
-    }
-    const onMessageChange = () => {
-        if (newMessageElement.current) {
-            props.updateNewMessageText(newMessageElement.current.value)
-        }
+    // const OnSendMessageCLick = () => {
+    //     if (newMessageElement.current) {
+    //         props.addMessage(newMessageElement.current.value)
+    //     }
+    // }
+    // const onMessageChange = () => {
+    //     if (newMessageElement.current) {
+    //         props.updateNewMessageText(newMessageElement.current.value)
+    //     }
+    // }
+
+    const addNewMessage = (value: string) => {
+        props.addMessage(value)
     }
 
     return (
@@ -41,16 +46,9 @@ function Dialogs(props: DialogsType) {
                 </div>
             </div>
             <div>
-                <div>
-                    <textarea className={s.inputMessage}
-                              autoFocus
-                              onChange={onMessageChange}
-                              ref={newMessageElement}
-                              value={props.dialogsPage.newMessageText}>
 
-                </textarea>
-                </div>
-                <button onClick={OnSendMessageCLick}>send</button>
+                <AddMessageForm onSubmit={addNewMessage}/>
+
             </div>
         </div>
     )
