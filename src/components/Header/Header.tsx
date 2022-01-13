@@ -16,7 +16,7 @@ function Header() {
                 <img src='https://image.shutterstock.com/image-vector/dots-letter-c-logo-design-260nw-551769190.jpg'/>
                 <h2>MySocial</h2>
                 <div className={styles.loginBlock}>
-                    {isAuth ? login : <NavLink to={'/login'}><Login/></NavLink>}
+                    {isAuth ? login : <NavLink to={'/login'}/>}
                 </div>
             </div>
 

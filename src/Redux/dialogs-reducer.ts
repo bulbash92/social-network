@@ -28,7 +28,6 @@ const initialState = {
         {message: 'How are you', id: v1()},
         {message: 'Yo', id: v1()}
     ] as Array<MessageType>,
-    newMessageBody: ''
 }
 
 export type InitialStateType = typeof initialState
@@ -37,15 +36,8 @@ const dialogsReducer = (state: InitialStateType = initialState, action: DialogsA
     switch (action.type) {
         case 'ADD-MESSAGE': {
             let body = action.newText
-            // const newMessageBody: MessageType = {
-            //     id: v1(),
-            // }
             return {...state,
                 messages: [...state.messages, {id: v1(), message: body}],}
-        }
-        case 'UPDATE-NEW-MESSAGE-TEXT': {
-            //const newState = {...state}
-            return {...state, newMessageBody: action.newText}
         }
         default:
             return state
@@ -54,7 +46,7 @@ const dialogsReducer = (state: InitialStateType = initialState, action: DialogsA
     return state
 }
 
-export type DialogsActionsType = ReturnType<typeof addMessage> | ReturnType<typeof updateNewMessageText>
+export type DialogsActionsType = ReturnType<typeof addMessage>
 
 export const addMessage = (messageText: string) => {
     return {
@@ -63,12 +55,6 @@ export const addMessage = (messageText: string) => {
 
     } as const
 }
-export const updateNewMessageText = (messageText: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newText: messageText
 
-    } as const
-}
 
 export default dialogsReducer

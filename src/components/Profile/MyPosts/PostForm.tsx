@@ -1,36 +1,41 @@
 import React from 'react';
-import FormGroup from '@mui/material/FormGroup';
-import TextField from '@mui/material/TextField';
+import FormGroup from "@mui/material/FormGroup";
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useFormik} from "formik";
 
-type PropsType = {
-    onSubmit: (values: any) => void
+
+type PostFormType = {
+    addPost: (value: string) => void
 }
 
-const AddMessageForm = (props: PropsType) => {
+
+const PostForm = (props: PostFormType) => {
 
     const formik = useFormik({
         initialValues: {
-            message: '',
+            post: '',
         },
         onSubmit: values => {
             console.log('values', values)
-            props.onSubmit(values.message)
+            props.addPost(values.post)
+            // props.onSubmit(values.post)
             formik.resetForm()
         }
     })
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <FormGroup>
                 <TextField
+                    style={{width: '160px', marginBottom: '10px'}}
                     id="outlined-textarea"
                     placeholder="Enter message"
-                    label='message'
+                    label='post'
                     multiline
-                    {...formik.getFieldProps('message')}
+                    {...formik.getFieldProps('post')}
                 />
-                <Button type={'submit'} variant={'contained'} color={'primary'}>
+                <Button type={'submit'} style={{width: '60px'}} variant={'contained'} color={'primary'}>
                     Send
                 </Button>
             </FormGroup>
@@ -38,4 +43,4 @@ const AddMessageForm = (props: PropsType) => {
     );
 };
 
-export default AddMessageForm;
+export default PostForm;

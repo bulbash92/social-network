@@ -1,4 +1,4 @@
-import {addMessage, InitialStateType, updateNewMessageText} from "../../Redux/dialogs-reducer";
+import {addMessage, InitialStateType} from "../../Redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
@@ -17,6 +17,6 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         isAuth: state.auth.isAuth
     }
 }
-export default compose<ComponentType>(connect(mapStateToProps, {addMessage, updateNewMessageText}),
+export default compose<ComponentType>(connect(mapStateToProps, {addMessage}),
     withAuthRedirect
 )(Dialogs);

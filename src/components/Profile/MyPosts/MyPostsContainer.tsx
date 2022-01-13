@@ -1,5 +1,5 @@
 import React from 'react'
-import {addPost, InitialStateType, ProfilePageType, updateNewPostText} from "../../../Redux/profile-reducer";
+import {addPost, InitialStateType, ProfilePageType} from "../../../Redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../Redux/redux-store";
@@ -14,6 +14,6 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-const MyPostsContainer = connect(mapStateToProps, {addPost, updateNewPostText})(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, {addPost,})(MyPosts)
 
 export default MyPostsContainer

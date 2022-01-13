@@ -1,10 +1,9 @@
 import {v1} from "uuid";
-import profileReducer, {addPost, updateNewPostText} from "./profile-reducer";
-import dialogsReducer, {addMessage, updateNewMessageText} from "./dialogs-reducer";
+import profileReducer, {addPost,} from "./profile-reducer";
+import dialogsReducer, {addMessage} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {followedToggle, setUsers} from "./usersReducer";
-
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
     getState: () => RootStateType
@@ -18,9 +17,7 @@ export type StoreType = {
 
  type ActionsType =
     ReturnType<typeof addPost>
-    | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof addMessage>
-    | ReturnType<typeof updateNewMessageText>
     | ReturnType<typeof followedToggle>
     | ReturnType<typeof setUsers>
 

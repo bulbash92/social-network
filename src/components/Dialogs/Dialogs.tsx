@@ -10,7 +10,6 @@ type DialogsType = {
     dialogsPage: DialogPageType
     isAuth: boolean
     addMessage: (text: string) => void
-    updateNewMessageText: (text: string) => void
 }
 
 function Dialogs(props: DialogsType) {
@@ -46,9 +45,7 @@ function Dialogs(props: DialogsType) {
                 </div>
             </div>
             <div>
-
                 <AddMessageForm onSubmit={addNewMessage}/>
-
             </div>
         </div>
     )

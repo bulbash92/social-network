@@ -9,6 +9,7 @@ export type initialStateAuthType = {
     login: string | null
     isAuth: boolean
     isInitialised: boolean
+    isLoggedIn: boolean
 }
 
 let initialState = {
@@ -17,6 +18,7 @@ let initialState = {
     login: null,
     isAuth: false,
     isInitialised: false,
+    isLoggedIn: false
 }
 export const authReducer = (state: initialStateAuthType = initialState, action: ActionAuthType) => {
     switch (action.type) {
