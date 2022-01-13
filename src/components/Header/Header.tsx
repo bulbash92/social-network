@@ -3,10 +3,8 @@ import {NavLink} from 'react-router-dom';
 import styles from "./Header.module.css";
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
-import Login from "../Login/Login";
 
 function Header() {
-
     const login = useSelector<AppStateType, string | null>(state => state.auth.login)
     const isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
     return (
@@ -19,7 +17,6 @@ function Header() {
                     {isAuth ? login : <NavLink to={'/login'}/>}
                 </div>
             </div>
-
         </header>
     )
 }
