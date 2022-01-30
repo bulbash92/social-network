@@ -1,17 +1,22 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Header from "./Header";
-import {useDispatch} from "react-redux";
-import {getAuthUserData} from "../../Redux/auth-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from "../../Redux/auth-reducer";
+import {AppStateType} from "../../Redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 function HeaderContainer() {
+
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getAuthUserData())
-    }, [])
+    const isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
 
+
+    const handleLogout = () => {
+        dispatch(logout())
+        if (!isAuth) return <Redirect to={'/login'}/>
+    }
     return (
-
-        <Header/>
+        <Header onLogout={handleLogout}/>
     )
 }
 

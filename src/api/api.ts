@@ -31,7 +31,6 @@ export const usersApi = {
     updateStatus(status: string) {
         return instance.put('profile/status', {status})
     }
-
 }
 
 export const authApi = {
@@ -41,6 +40,9 @@ export const authApi = {
     },
     login(data: LoginParamsType) {
         return instance.post('auth/login', data)
+    },
+    logout() {
+        return instance.delete('/auth/login', {})
     }
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
@@ -10,11 +10,28 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./Redux/redux-store";
+import {Preloader} from "./components/preloader/preloader";
+import {initializeApp} from "./Redux/app-reducer";
 
 
 function App() {
+    const dispatch = useDispatch()
+    const initialized = useSelector<AppStateType, boolean>(state => state.app.isInitialized)
+    console.log("initialized", initialized)
+    useEffect(() => {
+        dispatch(initializeApp())
+    }, [])
+
+
+    if (!initialized) {
+        return <Preloader/>
+    }
+
     return (
-        <div className= 'app-wrapper'>
+
+        <div className='app-wrapper'>
             <HeaderContainer/>
             <div className='app-wrapper-content'>
                 <Navbar/>
