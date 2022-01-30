@@ -1,6 +1,9 @@
 .header {
     background-color: #3498db;
     min-height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
 }
 
 .header h2 {
@@ -9,19 +12,42 @@
 }
 
 .wrapper {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
 }
+
 .header img {
     width: 50px;
     height: 50px;
 }
 
 .loginBlock {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5px;
     background-color: #354c5f;
-    margin-left: 200px;
-}
-.loginBlock a {
+    width: 150px;
     color: white;
-    text-decoration: none;
+    font-size: 18px;
+}
+
+.login {
+    border-bottom: 2px solid white;
+}
+
+.logoutButton {
+    width: 50px;
+    border: none;
+    background-color: #354c5f;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.logoutButton:hover,
+.logoutButton:focus {
+    font-size: 18px;
 }
 

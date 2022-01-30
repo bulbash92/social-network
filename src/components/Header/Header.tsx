@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import styles from "./Header.module.css";
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
@@ -15,12 +15,19 @@ function Header({onLogout}: PropsType) {
 
         <header className={styles.header}>
             <div className={styles.wrapper}>
-                <img alt={'logo'} src='https://image.shutterstock.com/image-vector/dots-letter-c-logo-design-260nw-551769190.jpg'/>
-                <h2>MySocial</h2>
-                <div className={styles.loginBlock}>
-                    {isAuth ? login : <Redirect to={'/login'}/>}
-                    {isAuth && <button onClick={onLogout}>logout</button>}
+                <div>
+                    <img alt={'logo'}
+                         src='https://image.shutterstock.com/image-vector/dots-letter-c-logo-design-260nw-551769190.jpg'/>
                 </div>
+                <h2>MySocial</h2>
+                <div className={isAuth ? styles.loginBlock: ''}>
+                    <div className={styles.login}>
+                        {isAuth ? login : <Redirect to={'/login'}/>}
+                    </div>
+                    {isAuth && <button className={styles.logoutButton} onClick={onLogout}>logout</button>}
+
+                </div>
+
             </div>
         </header>
     )
